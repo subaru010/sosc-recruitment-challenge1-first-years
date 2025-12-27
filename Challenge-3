@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anonity</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <h1>Anonymous ChatRoom</h1>
+
+  <form id="confessionForm">
+    <input
+      type="text"
+      id="alias"
+      placeholder="Alias name"
+      required
+    ><br><br>
+
+    <textarea
+      id="confession"
+      placeholder="Enter text ..."
+      required
+    ></textarea><br><br>
+
+    <button type="submit">Confess</button>
+  </form>
+
+  <h2>Chat History</h2>
+  <div id="confessions"></div>
+
+  
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
