@@ -1,59 +1,54 @@
 CHALLENGE - 3
 
-Anonity — Anonymous Confession Chatroom
-
+Anonity — Anonymous Confession Page
 1. Overview, Purpose, Problem & Solution
-Anonity is a minimal anonymous chatroom web application designed to allow users to post confessions or messages without revealing their real identity. 
-The purpose of this project is to create a safe space for expression, particularly for students who may hesitate to share thoughts due to fear of judgment or exposure.
-Many individuals avoid open communication in public platforms because of identity concerns.
-Anonity addresses this problem by allowing users to participate anonymously using a simple alias system, without requiring login credentials, emails, or personal data.
 
-2. Key Features:-
-• Anonymous message posting
-• Alias locking using browser localStorage
-• Real-time message updates
-• Timestamped confessions
-• Basic profanity filtering
-• Minimal terminal-style UI
+Anonity is an anonymous confession platform that enables individuals to share sensitive incidents, personal experiences, or hidden truths without revealing their identity. It is designed for people who fear judgment, backlash, or social consequences. Unlike a chatroom, Anonity functions as a confession page focused on disclosure rather than interaction. By eliminating login systems and personal data collection, the platform lowers the barrier to expression and allows important stories to surface responsibly.
 
+2. Key Features
 
-3. Tech Stack
+Anonymous confession posting
+
+Alias-based identity for minimal continuity
+
+Real-time updates
+
+Timestamped confessions
+
+Basic profanity filtering
+
+Minimal, distraction-free interface
+
+3. Platform Intent & Use Case
+
+Anonity is not a social media platform or discussion forum. Its purpose is to allow anonymous disclosures such as personal experiences, institutional issues, or sensitive incidents. For example, a student who discovers the real reason behind a reduction in funds can inform others without fear of identification. The platform encourages awareness and expression while discouraging judgment, debates, or popularity-based interactions.
+
+4. Tech Stack
+
 Frontend: HTML, CSS, JavaScript
-Backend: Supabase (PostgreSQL)
+Backend & Cloud Services: Supabase
 
+Supabase is used for database management and real-time data handling, leveraging cloud infrastructure to ensure availability and performance. No authentication, Google sign-in, or personal data collection is implemented.
 
-4. Frontend Details
-HTML handles the structure and layout of the page.
-CSS is used to create a matte, minimal, terminal-inspired design.
-JavaScript manages user interaction and backend communication.
+5. Alias, Profanity Filter & Timestamps
 
+Users select an alias on first use, which is stored locally using browser localStorage and reused on the same device. A basic profanity filter blocks restricted terms to reduce harmful content. Each confession includes an automatically generated timestamp, providing chronological context while preserving anonymity.
 
-5. Backend Details
-Supabase is used as a cloud-hosted PostgreSQL database.
-Confessions are stored and retrieved in real time.
-No authentication or user accounts are implemented.
+6. Data Flow
 
+User submits a confession →
+Input is validated via JavaScript →
+Data is stored in Supabase →
+Confessions are retrieved and displayed in real time
 
-6. Alias, Profanity Filter & Timestamps
-Users enter an alias during first use, which is stored in the browser’s localStorage and locked for future interactions.  
-A basic word-based profanity filter blocks restricted terms, ensuring minimal moderation of content.
-Each confession also displays the date and time based on the database-generated timestamp, allowing users to view messages in chronological context.
+7. Privacy, Ethical Concerns & Limitations
 
+Anonity does not collect emails, logins, or personal identifiers. However, anonymity introduces risks such as impersonation, unverifiable claims, and potential misuse. Aliases are device-specific and resettable by clearing browser storage. Confessions are not verified and should not be treated as factual or legal evidence. Readers are encouraged to engage thoughtfully and responsibly.
 
-7. Data Flow
-User submits confession →
-JavaScript validates input →
-Data is sent to Supabase →
-Messages are fetched and displayed.
+8. Cloud & Infrastructure Note
 
+Supabase serves as the primary backend and cloud service provider, offering secure database storage and real-time updates through managed infrastructure. While Supabase operates on cloud services, Anonity does not directly integrate user-facing Google tools or collect Google account data, ensuring the platform remains privacy-focused.
 
-8. Running the Project
-Clone the repository.
-Open index.html in a browser.
-An internet connection is required.
+9. Future Improvements
 
-
-9. Privacy, Limitations & Future Improvements
-The application does not use a login system and does not collect personal data, with aliases stored locally in the user’s browser.
-Current limitations include basic moderation, inability to change aliases without clearing storage, and lack of reply or threading features.
-Possible future improvements include adding user reporting, an admin moderation panel, reactions or emojis, and a more advanced profanity filtering system.
+Future enhancements may include content reporting, moderation tools, clearer ethical guidelines, and improved filtering systems. Optional categorization of confessions and post-level disclaimers could further reduce misuse while maintaining anonymity. These improvements aim to strengthen trust, safety, and responsible expression.
