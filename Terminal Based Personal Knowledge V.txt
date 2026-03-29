@@ -1,0 +1,102 @@
+Terminal Based Personal Knowledge Vault
+
+SOSC Recruitment – Round 2 Challenge
+
+Author: (Write your name here)
+Year: 1st Year
+Language Used: C++
+Project Type: Terminal Application
+
+
+Project Description:-
+
+This project is a simple terminal-based notes manager written in C++. 
+It allows users to create, view, search, edit, and delete notes directly 
+from the command line.
+
+The notes are stored locally in a text file named "notes.txt" so that 
+data remains saved even after closing the program.
+
+The goal of this project is to practice and demonstrate basic problem 
+solving using C++, including use of structures, vectors, file handling, 
+loops, and menu-based programs.
+
+
+
+Features Implemented:-
+
+1. Create a new note (title + content)
+2. List all saved notes
+3. View a note using its ID
+4. Search notes using keywords
+5. Edit existing notes
+6. Delete notes
+7. Save notes to a text file (notes.txt)
+8. Load notes automatically when program starts
+9. Fully terminal-based interface
+
+
+Data Storage Format
+All notes are stored locally in:-
+notes.txt
+
+Each note is saved using the format:
+id|title|content
+
+Example:
+1|Shopping|Buy milk and bread
+2|Study|Finish SOSC assignment
+
+
+How to Compile
+Open a terminal in the project folder and run:
+g++ your_filename.cpp -o vault
+
+
+
+How to Run
+
+On Windows:
+vault.exe
+
+On Linux or Mac:
+./vault
+
+Program Menu
+After running the program, the following menu appears:
+
+1. Create note
+2. List notes
+3. View note
+4. Search notes
+5. Edit note
+6. Delete note
+7. Exit
+
+Menu Usage
+1 - Add a new note  
+2 - Display all note titles with IDs  
+3 - View complete note using ID  
+4 - Search notes using any word  
+5 - Modify existing note  
+6 - Delete a note  
+7 - Exit the program  
+
+Limitations
+- Notes can only contain single-line text.
+- The '|' character is not allowed inside titles or content.
+- No tags or encryption features are added.
+
+Learning Outcome
+This project helped me understand:
+- How to use structs in C++
+- Working with vectors
+- File input/output using ifstream and ofstream
+- Creating menu-driven programs
+- Loops, conditionals, and functions
+- Storing data permanently using files
+
+Conclusion
+This project satisfies all the core requirements for the SOSC Round 2 
+challenge and demonstrates basic understanding of C++ and programming 
+logic.

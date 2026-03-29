@@ -1,0 +1,226 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Note {
+    int id;
+    string title;
+    string content;
+};
+
+vector<Note> notes;
+const string FILENAME = "notes.txt";
+
+
+vector<string> split(const string &s, char delim) {
+    vector<string> parts;
+    string cur;
+    for (char c : s) {
+        if (c == delim) {
+            parts.push_back(cur);
+            cur.clear();
+        } else {
+            cur += c;
+        }
+    }
+    parts.push_back(cur);
+    return parts;
+}
+
+int getNextId() {
+    int mx = 0;
+    for (auto &n : notes) {
+        if (n.id > mx) mx = n.id;
+    }
+    return mx + 1;
+}
+
+int findIndexById(int id) {
+    for (int i = 0; i < (int)notes.size(); i++) {
+        if (notes[i].id == id) return i;
+    }
+    return -1;
+}
+
+
+void loadNotes() {
+    notes.clear();
+    ifstream fin(FILENAME);
+    if (!fin.is_open()) {
+        return; // no file yet, ok
+    }
+    string line;
+    while (getline(fin, line)) {
+        if (line.empty()) continue;
+        auto parts = split(line, '|');
+        if (parts.size() < 3) continue;
+        Note n;
+        n.id = stoi(parts[0]);
+        n.title = parts[1];
+        n.content = parts[2];
+        notes.push_back(n);
+    }
+    fin.close();
+}
+
+void saveNotes() {
+    ofstream fout(FILENAME);
+    for (auto &n : notes) {
+        // very simple: id|title|content (no '|' allowed inside title/content)
+        fout << n.id << "|" << n.title << "|" << n.content << "\n";
+    }
+    fout.close();
+}
+
+
+void createNote() {
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
+
+    Note n;
+    n.id = getNextId();
+
+    cout << "Enter title (no '|' allowed): ";
+    getline(cin, n.title);
+
+    cout << "Enter content (single line, no '|' allowed): ";
+    getline(cin, n.content);
+
+    notes.push_back(n);
+    saveNotes();
+
+    cout << "Note created with ID: " << n.id << "\n";
+}
+
+void listNotes() {
+    if (notes.empty()) {
+        cout << "No notes yet.\n";
+        return;
+    }
+    for (auto &n : notes) {
+        cout << "[" << n.id << "] " << n.title << "\n";
+    }
+}
+
+void viewNote() {
+    cout << "Enter note ID: ";
+    int id;
+    cin >> id;
+
+    int idx = findIndexById(id);
+    if (idx == -1) {
+        cout << "Note not found.\n";
+        return;
+    }
+
+    Note &n = notes[idx];
+    cout << "ID: " << n.id << "\n";
+    cout << "Title: " << n.title << "\n";
+    cout << "Content: " << n.content << "\n";
+}
+
+void searchNotes() {
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
+
+    cout << "Enter keyword to search in title/content: ";
+    string key;
+    getline(cin, key);
+
+    bool found = false;
+    for (auto &n : notes) {
+        if (n.title.find(key) != string::npos ||
+            n.content.find(key) != string::npos) {
+            cout << "[" << n.id << "] " << n.title << "\n";
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "No matching notes.\n";
+    }
+}
+
+void editNote() {
+    cout << "Enter note ID to edit: ";
+    int id;
+    cin >> id;
+
+    int idx = findIndexById(id);
+    if (idx == -1) {
+        cout << "Note not found.\n";
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
+    Note &n = notes[idx];
+
+    cout << "Current title: " << n.title << "\n";
+    cout << "Enter new title (leave empty to keep): ";
+    string newTitle;
+    getline(cin, newTitle);
+    if (!newTitle.empty()) n.title = newTitle;
+
+    cout << "Current content: " << n.content << "\n";
+    cout << "Enter new content (leave empty to keep): ";
+    string newContent;
+    getline(cin, newContent);
+    if (!newContent.empty()) n.content = newContent;
+
+    saveNotes();
+    cout << "Note updated.\n";
+}
+
+void deleteNote() {
+    cout << "Enter note ID to delete: ";
+    int id;
+    cin >> id;
+
+    int idx = findIndexById(id);
+    if (idx == -1) {
+        cout << "Note not found.\n";
+        return;
+    }
+
+    notes.erase(notes.begin() + idx);
+    saveNotes();
+    cout << "Note deleted.\n";
+}
+
+
+void showMenu() {
+    cout << "\n==== Personal Knowledge Vault ====\n";
+    cout << "1. Create note\n";
+    cout << "2. List notes\n";
+    cout << "3. View note\n";
+    cout << "4. Search notes\n";
+    cout << "5. Edit note\n";
+    cout << "6. Delete note\n";
+    cout << "7. Exit\n";
+    cout << "Choose: ";
+}
+
+int main() {
+    loadNotes();
+
+    while (true) {
+        showMenu();
+        int choice;
+        if (!(cin >> choice)) {
+            cout << "Invalid input. Exiting.\n";
+            break;
+        }
+
+        switch (choice) {
+            case 1: createNote();  break;
+            case 2: listNotes();   break;
+            case 3: viewNote();    break;
+            case 4: searchNotes(); break;
+            case 5: editNote();    break;
+            case 6: deleteNote();  break;
+            case 7:
+                cout << "Goodbye!\n";
+                return 0;
+            default:
+                cout << "Invalid option.\n";
+        }
+    }
+
+    return 0;
+}
